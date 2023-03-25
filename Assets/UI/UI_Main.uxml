@@ -1,0 +1,35 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xmlns="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/UI_Style.uss?fileID=7433441132597879392&amp;guid=db67838345b72ca4498b236ffd075f5c&amp;type=3#UI_Style" />
+    
+    <ui:VisualElement name="Frame">
+    
+        <ui:VisualElement name="Header">
+
+            <ui:Label name="Header-Label" text="Classement" class="ui-label-text" />
+            
+            <ui:Button name="Header-Button">
+                <ui:VisualElement name="Header-Button-Icon"/>
+            </ui:Button>
+            
+
+        </ui:VisualElement>
+        
+        <ui:VisualElement name="Body">
+
+        </ui:VisualElement>
+
+    </ui:VisualElement>
+    
+    <!--<ui:VisualElement name="Buttons" class="ui-buttons">
+        
+        <ui:Button name="Green Button" class="ui-button ui-button-green">
+            <ui:Label name="Label" text="Button" class="ui-button-text ui-button-text-default-color" />
+        </ui:Button>
+
+        <ui:Button name="Red Button" class="ui-button ui-button-red">
+            <ui:Label name="Label" text="Button" class="ui-button-text ui-button-text-default-color" />
+        </ui:Button>
+
+    </ui:VisualElement>-->
+
+</ui:UXML>

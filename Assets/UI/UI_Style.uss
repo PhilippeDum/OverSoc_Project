@@ -1,0 +1,131 @@
+VisualElement {}
+
+/* UI Frame */
+
+#Frame
+{
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	padding: 0px;
+
+	width: 768px;
+	height: 952px;
+
+	background-color: #262626;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	border-radius: 8px;
+
+	flex: none;
+	order: 0;
+	align-self: stretch;
+	flex-grow: 0;
+}
+
+#Header
+{
+	box-sizing: border-box;
+
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	padding: 32px;
+	gap: 24px;
+
+	width: 768px;
+	height: 106px;
+
+	background-color: #333333;
+	border-color: #4D4D4D;
+	border-bottom-width: 2px solid;
+
+	flex: none;
+	order: 0;
+	align-self: stretch;
+	flex-grow: 0;
+}
+
+#Header-Label
+{
+	width: 640px;
+	height: 38px;
+
+	-unity-font: resource("Fonts/Roboto-Regular");
+	-unity-font-definition: none;
+	-unity-font-style: normal;
+	font-size: 32px;
+	font-width: 38px;
+
+	color: #FFFFFF;
+
+	flex: none;
+	order: 0;
+	flex-grow: 1;
+	z-index: 1;
+}
+
+#Header-Button
+{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	padding: 0px 10px;
+
+	width: 40px;
+	height: 40px;
+
+	background-color: #333333;
+	border-radius: 4px;
+
+	flex: none;
+	order: 1;
+	flex-grow: 0;
+	z-index: 0;
+}
+
+#Header-Button:hover
+{	
+	opacity: 0.2;
+
+	order: 1;
+}
+
+#Header-Button:active
+{	
+	opacity: 0.1;
+
+	order: 2;
+}
+
+#Header-Button-Icon
+{
+	width: 14px;
+	height: 14px;
+
+	background: #FFFFFF;
+	background-image: resource("Icons/Vector");
+
+	flex: none;
+	order: 0;
+	flex-grow: 0;
+}
+
+/* UI Frame Body */
+
+#Body
+{
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	padding: 32px;
+	gap: 24px;
+
+	width: 768px;
+	height: 846px;
+
+	flex: none;
+	order: 1;
+	align-self: stretch;
+	flex-grow: 1;
+}
