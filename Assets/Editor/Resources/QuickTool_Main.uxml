@@ -1,0 +1,13 @@
+<UXML xmlns="UnityEngine.UIElements">
+    <!-- Creates the template and gives it a name for future reference -->
+    <Template path="Assets/Editor/Resources/ButtonTemplate.uxml" name="button-template" />
+    <!-- Creates a parent VisualElement inside which the button template will be used -->
+    <VisualElement class="buttons-container">
+        <!-- Instantiates the template multiple times - Each time, a name is given for future reference -->
+        <Instance template="button-template" name="Cube" />
+        <Instance template="button-template" name="Sphere" />
+        <Instance template="button-template" name="Capsule" />
+        <Instance template="button-template" name="Cylinder" />
+        <Instance template="button-template" name="Plane" />
+    </VisualElement>
+</UXML>
