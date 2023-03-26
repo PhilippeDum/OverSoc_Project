@@ -37,7 +37,7 @@ VisualElement {}
 
 	background-color: #333333;
 	border-color: #4D4D4D;
-	border-bottom-width: 2px solid;
+	border-bottom-width: 2px;
 
 	flex: none;
 	order: 0;
@@ -86,6 +86,7 @@ VisualElement {}
 
 #Header-Button:hover
 {	
+	background-color: #333333;
 	opacity: 0.2;
 
 	order: 1;
@@ -93,6 +94,7 @@ VisualElement {}
 
 #Header-Button:active
 {	
+	background-color: #333333;
 	opacity: 0.1;
 
 	order: 2;
@@ -102,7 +104,7 @@ VisualElement {}
 {
 	width: 14px;
 	height: 14px;
-
+	
 	background: #FFFFFF;
 	background-image: resource("Icons/Vector");
 

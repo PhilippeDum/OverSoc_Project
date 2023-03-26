@@ -5,31 +5,43 @@
     
         <ui:VisualElement name="Header">
 
-            <ui:Label name="Header-Label" text="Classement" class="ui-label-text" />
+            <ui:Label name="Header-Label" text="Classement" />
             
             <ui:Button name="Header-Button">
                 <ui:VisualElement name="Header-Button-Icon"/>
             </ui:Button>
-            
 
         </ui:VisualElement>
         
         <ui:VisualElement name="Body">
 
+            <ui:VisualElement name="Tools">
+            
+                <ui:VisualElement name="Add-Part">
+                
+                    <ui:TextField name="Add-TextField" text="Nouveau participant" />
+
+                    <ui:Button name="Add-Button">
+                        <ui:Label name="Add-Button-Label" text="Ajouter a la liste" />
+                    </ui:Button>
+
+                </ui:VisualElement>
+
+                <ui:VisualElement name="Switch-Part">
+
+                    <ui:Toggle name="Switch">
+
+                        <ui:Label name="Off-Label" text="Ajouter au pied de la liste" />
+                        <ui:Label name="On-Label" text="Ajouter au sommet de la liste" />
+
+                    </ui:Toggle>
+
+                </ui:VisualElement>
+
+            </ui:VisualElement>
+
         </ui:VisualElement>
 
     </ui:VisualElement>
-    
-    <!--<ui:VisualElement name="Buttons" class="ui-buttons">
-        
-        <ui:Button name="Green Button" class="ui-button ui-button-green">
-            <ui:Label name="Label" text="Button" class="ui-button-text ui-button-text-default-color" />
-        </ui:Button>
-
-        <ui:Button name="Red Button" class="ui-button ui-button-red">
-            <ui:Label name="Label" text="Button" class="ui-button-text ui-button-text-default-color" />
-        </ui:Button>
-
-    </ui:VisualElement>-->
 
 </ui:UXML>
