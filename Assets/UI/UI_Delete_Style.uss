@@ -1,0 +1,155 @@
+#Delete
+{
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	padding: 0px;
+	gap: 16px;
+
+	width: 704px;
+	height: 40px;
+
+	flex: none;
+	order: 2;
+	align-self: stretch;
+	flex-grow: 0;
+}
+
+#Delete-Button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 0px;
+    padding: 0px 24px;
+    width: 170px;
+    height: 40px;
+    background-color: #FF395D;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+#Delete-Button:hover {
+    background-color: #FF6581;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    order: 1;
+}
+
+#Delete-Button:active {
+    background-color: #D83351;
+    order: 2;
+}
+
+#Delete-Button:disabled {
+    background-color: ##4D4D4D;
+    order: 3;
+}
+
+#Delete-Button-Label {
+    width: 52px;
+    height: 19px;
+    -unity-font: resource('Fonts/Roboto-Regular');
+    -unity-font-definition: none;
+    -unity-font-style: normal;
+    font-size: 16px;
+    color: rgb(0, 0, 0);
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+#Limit
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px;
+    gap: 16px;
+
+    width: 518px;
+    height: 40px;
+
+    flex: none;
+    order: 0;
+    flex-grow: 1;
+}
+
+#Limit-Texts
+{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0px;
+
+    width: 518px;
+    height: 19px;
+
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+#Limit-Texts-Label
+{
+    width: 467px;
+    height: 19px;
+    
+    -unity-font: resource('Fonts/Roboto-Regular');
+    -unity-font-definition: none;
+    -unity-font-style: normal;
+    font-size: 16px;
+    margin: 0px;
+    padding: 0px;
+
+    color: #FFFFFF;
+
+    flex: none;
+    order: 0;
+    flex-grow: 1;
+}
+
+#Limit-Texts-Numbers
+{
+    width: 51px;
+    height: 19px;
+
+    -unity-font: resource('Fonts/Roboto-Regular');
+    -unity-font-definition: none;
+    -unity-font-style: normal;
+    font-size: 16px;
+    margin: 0px;
+    padding: 0px;
+
+    color: #FFFFFF;
+
+    opacity: 0.5;
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+#CustomProgressBar
+{
+    box-sizing: border-box;
+
+    width: 518px;
+    height: 8px;
+
+    align-items: center;
+
+    background-color: #4D4D4D;
+    border-left-width: 358.5px;
+    border-color: #00D9B2;
+    border-radius: 8px;
+
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 0;
+}

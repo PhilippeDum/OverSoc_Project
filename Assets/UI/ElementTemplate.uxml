@@ -1,0 +1,8 @@
+<UXML xmlns="UnityEngine.UIElements">
+    <!-- Creates the button -->
+    <VisualElement class="custom-element" name="CustomElement">
+        <Label name="ID" />
+        <Label name="Name" />
+        <VisualElement name="ElementIcon" />
+    </VisualElement>
+</UXML>

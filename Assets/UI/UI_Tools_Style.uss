@@ -1,0 +1,186 @@
+#Tools {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 0;
+    gap: 16px;
+    width: 704px;
+    height: 88px;
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+#Add-Part {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0;
+    gap: 16px;
+    width: 704px;
+    height: 40px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+#Add-TextField {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 19px 16px;
+    gap: 16px;
+    width: 518px;
+    height: 40px;
+    background-color: rgb(51, 51, 51);
+    border-width: 2px;
+    border-color: rgb(77, 77, 77);
+    border-radius: 4px;
+    flex: none;
+    order: 0;
+    flex-grow: 1;
+}
+
+#Add-TextField:hover {
+    background-color: rgb(51, 51, 51);
+    opacity: 0.2;
+    order: 1;
+}
+
+#Add-TextField:active {
+    background-color: rgb(51, 51, 51);
+    opacity: 0.1;
+    order: 2;
+}
+
+#Add-TextField:focus {
+    background-color: rgb(51, 51, 51);
+    border-color: rgb(0, 217, 178);
+    order: 3;
+}
+
+.unity-text-field__input {
+    width: 486px;
+    height: 19px;
+    -unity-font: resource('Fonts/Roboto-Regular');
+    -unity-font-definition: none;
+    -unity-font-style: normal;
+    font-size: 16px;
+    padding: 0;
+    background-color: rgba(255, 255, 255, 0);
+    border-width: 0;
+    color: rgba(255, 255, 255, 0.5);
+    flex: none;
+    order: 0;
+    flex-grow: 1;
+}
+
+#Add-Button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0 24px;
+    width: 170px;
+    height: 40px;
+    background-color: rgb(0, 217, 178);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+#Add-Button:hover {
+    background-color: rgb(15, 255, 212);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    order: 1;
+}
+
+#Add-Button:active {
+    background-color: rgb(0, 168, 138);
+    order: 2;
+}
+
+#Add-Button:disabled {
+    background-color: rgb(77, 77, 77);
+    order: 3;
+}
+
+#Add-Button-Label {
+    width: 52px;
+    height: 19px;
+    -unity-font: resource('Fonts/Roboto-Regular');
+    -unity-font-definition: none;
+    -unity-font-style: normal;
+    font-size: 16px;
+    color: rgb(0, 0, 0);
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+#Switch-Part {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    gap: 16px;
+    width: 704px;
+    height: 32px;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+#Off-Label {
+    width: 23px;
+    height: 19px;
+    -unity-font: resource('Fonts/Roboto-Regular');
+    -unity-font-definition: none;
+    -unity-font-style: normal;
+    font-size: 16px;
+    color: rgb(255, 255, 255);
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+#On-Label {
+    width: 20px;
+    height: 19px;
+    -unity-font: resource('Fonts/Roboto-Regular');
+    -unity-font-definition: none;
+    -unity-font-style: normal;
+    font-size: 16px;
+    color: rgb(255, 255, 255);
+    opacity: 0.5;
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+}
+
+.unity-toggle__input {
+    width: 64px;
+    height: 32px;
+    background-color: rgb(77, 77, 77);
+    border-radius: 20px;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+.unity-checkmark {
+    position: absolute;
+    left: 8px;
+    right: 36px;
+    top: 26px;
+    bottom: -14px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 100px;
+}

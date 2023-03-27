@@ -54,7 +54,6 @@ VisualElement {}
 	-unity-font-definition: none;
 	-unity-font-style: normal;
 	font-size: 32px;
-	font-width: 38px;
 
 	color: #FFFFFF;
 
