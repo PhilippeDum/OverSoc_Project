@@ -9,9 +9,12 @@ public class UI_Manager : MonoBehaviour
 
     [SerializeField] private List<string> characters;
 
+
     UIDocument uiDocument;
 
     private TextField textField;
+    [SerializeField] private string placeholder = "Nouveau participant";
+    private string placeholderClass;
 
     private Button headerButton;
     private Button addButton;
@@ -30,16 +33,20 @@ public class UI_Manager : MonoBehaviour
     {
         uiDocument = GetComponent<UIDocument>();
 
-        textField = uiDocument.rootVisualElement.Q("Add-TextField") as TextField;
-
         headerButton = uiDocument.rootVisualElement.Q("Header-Button") as Button;
         headerButton.RegisterCallback<ClickEvent>(Quit);
 
         addButton = uiDocument.rootVisualElement.Q("Add-Button") as Button;
-        addButton.RegisterCallback<ClickEvent>(AddElement);
+        addButton.RegisterCallback<ClickEvent>(AddParticipant);
 
         deleteButton = uiDocument.rootVisualElement.Q("Delete-Button") as Button;
-        deleteButton.RegisterCallback<ClickEvent>(RemoveElement);
+        deleteButton.RegisterCallback<ClickEvent>(RemoveParticipant);
+
+        textField = uiDocument.rootVisualElement.Q("Add-TextField") as TextField;
+        placeholderClass = TextField.ussClassName + "__placeholder";
+        OnFocusOut();
+        textField.RegisterCallback<FocusInEvent>(evt => OnFocusIn());
+        textField.RegisterCallback<FocusOutEvent>(evt => OnFocusOut());
 
         currentLimit = characters.Count;
 
@@ -55,6 +62,11 @@ public class UI_Manager : MonoBehaviour
 
     private void Update()
     {
+        if (!string.IsNullOrEmpty(textField.value) && textField.value != placeholder)
+        {
+            addButton.SetEnabled(true);
+        }
+
         if (selectedElement == null)
         {
             deleteButton.SetEnabled(false);
@@ -70,42 +82,59 @@ public class UI_Manager : MonoBehaviour
         Debug.Log($"Quit Application");
     }
 
-    private void AddElement(ClickEvent evt)
+    #region Handle TextField
+
+    private void OnFocusIn()
+    {
+        if (textField.ClassListContains(placeholderClass))
+        {
+            textField.value = string.Empty;
+            textField.RemoveFromClassList(placeholderClass);
+        }
+    }
+
+    private void OnFocusOut()
+    {
+        if (string.IsNullOrEmpty(textField.value))
+        {
+            textField.SetValueWithoutNotify(placeholder);
+            textField.AddToClassList(placeholderClass);
+
+            addButton.SetEnabled(false);
+        }
+    }
+
+    #endregion
+
+    #region Handle List
+
+    private void AddParticipant(ClickEvent evt)
     {
         if (textField == null || listView == null) return;
 
-        Debug.Log($"Add {textField.text}");
+        characters.Add(textField.text);
 
-        var template = elementTemplate.Instantiate();
-        var customElement = template.Q("CustomElement");
-        Label label_Char = customElement.Q("Name") as Label;
-        label_Char.text = textField.text;
-
-        characters[characters.Count] = textField.text;
-        uiDocument.rootVisualElement.Q<ListView>("Content").RefreshItems();
-    }
-
-    private void RemoveElement(ClickEvent evt)
-    {
-        if (selectedElement == null || listView == null) return;
-
-        Debug.Log($"Remove {selectedElement} - {selectedElement.parent}");
-        selectedElement.RemoveFromHierarchy();
-        listView.Remove(selectedElement);
         listView.RefreshItems();
     }
 
-    private VisualElement SetupCustomElement(VisualTreeAsset elementTemplate)
+    private void RemoveParticipant(ClickEvent evt)
     {
-        var template = elementTemplate.Instantiate();
-        var customElement = template.Q("CustomElement");
-        customElement.RegisterCallback<ClickEvent>(SelectElement);
-        return template;
+        if (selectedElement == null || listView == null) return;
+
+        Label label_Char = selectedElement.Q("Name") as Label;
+
+        characters.Remove(label_Char.text);
+
+        listView.RefreshItems();
+
+        selectedElement = null;
     }
 
-    private void SelectElement(ClickEvent evt)
+    private void SelectParticipant(ClickEvent evt)
     {
         selectedElement = (VisualElement)evt.currentTarget;
+
+        Debug.Log($"Select '{selectedElement.name}'");
     }
 
     private void HandleList()
@@ -116,7 +145,9 @@ public class UI_Manager : MonoBehaviour
 
         listView.makeItem = () =>
         {
-            return SetupCustomElement(elementTemplate);
+            VisualElement template = elementTemplate.Instantiate();
+            template.RegisterCallback<ClickEvent>(SelectParticipant);
+            return template;
         };
 
         listView.bindItem = (element, index) =>
@@ -140,11 +171,13 @@ public class UI_Manager : MonoBehaviour
         listView.itemsSource = characters;
         listView.selectionType = SelectionType.Multiple;
         listView.fixedItemHeight = 52;
-        listView.onItemsChosen += OnItemsChosen;
+        //listView.onItemsChosen += OnItemsChosen;
     }
 
     private void OnItemsChosen(IEnumerable<object> objets)
     {
         Debug.Log($"{nameof(OnItemsChosen)}()");
     }
+
+    #endregion
 }

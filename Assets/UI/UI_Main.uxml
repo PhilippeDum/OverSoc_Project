@@ -13,7 +13,8 @@
         <ui:VisualElement name="Body">
             <ui:VisualElement name="Tools">
                 <ui:VisualElement name="Add-Part">
-                    <ui:TextField name="Add-TextField" text="Nouveau participant" />
+                    <ui:TextField name="Add-TextField">
+                    </ui:TextField>
                     <ui:Button name="Add-Button">
                         <ui:Label name="Add-Button-Label" text="Ajouter a la liste" />
                     </ui:Button>
