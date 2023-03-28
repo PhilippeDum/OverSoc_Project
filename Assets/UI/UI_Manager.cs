@@ -1,33 +1,36 @@
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class UI_Manager : MonoBehaviour
 {
+    [Header("References")]
     [SerializeField] private VisualTreeAsset elementTemplate;
-
     [SerializeField] private List<string> characters;
-
-
     UIDocument uiDocument;
 
-    private TextField textField;
     [SerializeField] private string placeholder = "Nouveau participant";
+    private TextField textField;
     private string placeholderClass;
 
     private Button headerButton;
     private Button addButton;
     private Button deleteButton;
 
-    private Label limitLabel;
-    private int maxLimit = 20;
-    private int currentLimit;
+    [SerializeField] private int maxParticipants = 20;
+    private int nbParticipants;
+    private Label limitParticipantsLabel;
 
     private ProgressBar progressBar;
 
     private ListView listView;
     private VisualElement selectedElement;
+
+    private Toggle switchToggle;
+    private Label offLabel;
+    private Label onLabel;
+
+    private VisualElement knob;
 
     private void Start()
     {
@@ -42,31 +45,42 @@ public class UI_Manager : MonoBehaviour
         deleteButton = uiDocument.rootVisualElement.Q("Delete-Button") as Button;
         deleteButton.RegisterCallback<ClickEvent>(RemoveParticipant);
 
-        textField = uiDocument.rootVisualElement.Q("Add-TextField") as TextField;
-        placeholderClass = TextField.ussClassName + "__placeholder";
-        OnFocusOut();
-        textField.RegisterCallback<FocusInEvent>(evt => OnFocusIn());
-        textField.RegisterCallback<FocusOutEvent>(evt => OnFocusOut());
+        InitializeParticipantTextField();
 
-        currentLimit = characters.Count;
+        switchToggle = uiDocument.rootVisualElement.Q("Switch") as Toggle;
+        offLabel = uiDocument.rootVisualElement.Q("Off-Label") as Label;
+        onLabel = uiDocument.rootVisualElement.Q("On-Label") as Label;
 
-        limitLabel = uiDocument.rootVisualElement.Q("Limit-Texts-Numbers") as Label;
-        limitLabel.text = $"{currentLimit} / {maxLimit}";
+        HandleSwitchOption();
+
+        nbParticipants = characters.Count;
+
+        limitParticipantsLabel = uiDocument.rootVisualElement.Q("Limit-Texts-Numbers") as Label;
+        limitParticipantsLabel.text = $"{nbParticipants} / {maxParticipants}";
 
         progressBar = uiDocument.rootVisualElement.Q("CustomProgressBar") as ProgressBar;
-        progressBar.highValue = maxLimit;
-        progressBar.value = currentLimit;
-        
+        progressBar.highValue = maxParticipants;
+        progressBar.value = nbParticipants;
+
         HandleList();
     }
 
     private void Update()
     {
-        if (!string.IsNullOrEmpty(textField.value) && textField.value != placeholder)
+        // Handle Add button state
+        if (nbParticipants < maxParticipants)
         {
-            addButton.SetEnabled(true);
+            if (!string.IsNullOrEmpty(textField.value) && textField.value != placeholder)
+            {
+                addButton.SetEnabled(true);
+            }
+        }
+        else
+        {
+            addButton.SetEnabled(false);
         }
 
+        // Handle Delete button state
         if (selectedElement == null)
         {
             deleteButton.SetEnabled(false);
@@ -75,6 +89,8 @@ public class UI_Manager : MonoBehaviour
         {
             deleteButton.SetEnabled(true);
         }
+
+        HandleSwitchOption();
     }
 
     private void Quit(ClickEvent evt)
@@ -82,7 +98,39 @@ public class UI_Manager : MonoBehaviour
         Debug.Log($"Quit Application");
     }
 
-    #region Handle TextField
+    private void UpdateParticipants()
+    {
+        limitParticipantsLabel.text = $"{nbParticipants} / {maxParticipants}";
+        progressBar.value = nbParticipants;
+    }
+
+    private void HandleSwitchOption()
+    {
+        if (!switchToggle.value)
+        {
+            offLabel.style.opacity = 1f;
+            onLabel.style.opacity = 0.5f;
+        }
+        else
+        {
+            offLabel.style.opacity = 0.5f;
+            onLabel.style.opacity = 1f;
+        }
+    }
+
+    #region Handle New Participant TextField
+
+    private void InitializeParticipantTextField()
+    {
+        textField = uiDocument.rootVisualElement.Q("Add-TextField") as TextField;
+
+        placeholderClass = TextField.ussClassName + "__placeholder";
+
+        OnFocusOut();
+
+        textField.RegisterCallback<FocusInEvent>(evt => OnFocusIn());
+        textField.RegisterCallback<FocusOutEvent>(evt => OnFocusOut());
+    }
 
     private void OnFocusIn()
     {
@@ -106,41 +154,10 @@ public class UI_Manager : MonoBehaviour
 
     #endregion
 
-    #region Handle List
-
-    private void AddParticipant(ClickEvent evt)
-    {
-        if (textField == null || listView == null) return;
-
-        characters.Add(textField.text);
-
-        listView.RefreshItems();
-    }
-
-    private void RemoveParticipant(ClickEvent evt)
-    {
-        if (selectedElement == null || listView == null) return;
-
-        Label label_Char = selectedElement.Q("Name") as Label;
-
-        characters.Remove(label_Char.text);
-
-        listView.RefreshItems();
-
-        selectedElement = null;
-    }
-
-    private void SelectParticipant(ClickEvent evt)
-    {
-        selectedElement = (VisualElement)evt.currentTarget;
-
-        Debug.Log($"Select '{selectedElement.name}'");
-    }
+    #region Handle Participants List
 
     private void HandleList()
     {
-        var customList = new List<string>(characters.Count);
-
         listView = uiDocument.rootVisualElement.Q<ListView>("Content");
 
         listView.makeItem = () =>
@@ -171,12 +188,56 @@ public class UI_Manager : MonoBehaviour
         listView.itemsSource = characters;
         listView.selectionType = SelectionType.Multiple;
         listView.fixedItemHeight = 52;
-        //listView.onItemsChosen += OnItemsChosen;
+        listView.reorderable = true;
+        listView.reorderMode = ListViewReorderMode.Animated;
+
+        listView.Q("unity-low-button").visible = false;
+        listView.Q("unity-high-button").visible = false;
     }
 
-    private void OnItemsChosen(IEnumerable<object> objets)
+    private void SelectParticipant(ClickEvent evt)
     {
-        Debug.Log($"{nameof(OnItemsChosen)}()");
+        selectedElement = (VisualElement)evt.currentTarget;
+    }
+
+    private void AddParticipant(ClickEvent evt)
+    {
+        if (textField == null || listView == null) return;
+
+        if (nbParticipants == maxParticipants) return;
+
+        if (!switchToggle.value)
+        {
+            characters.Add(textField.text);
+        }
+        else
+        {
+            characters.Insert(0, textField.text);
+        }
+
+        nbParticipants++;
+        UpdateParticipants();
+
+        textField.value = string.Empty;
+        OnFocusOut();
+
+        listView.RefreshItems();
+    }
+
+    private void RemoveParticipant(ClickEvent evt)
+    {
+        if (selectedElement == null || listView == null) return;
+
+        Label label_Char = selectedElement.Q("Name") as Label;
+
+        characters.Remove(label_Char.text);
+        nbParticipants--;
+
+        UpdateParticipants();
+
+        listView.RefreshItems();
+
+        selectedElement = null;
     }
 
     #endregion

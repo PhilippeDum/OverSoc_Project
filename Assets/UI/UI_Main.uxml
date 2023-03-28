@@ -1,8 +1,8 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xmlns="UnityEngine.UIElements" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI/UI_Main_Style.uss?fileID=7433441132597879392&amp;guid=db67838345b72ca4498b236ffd075f5c&amp;type=3#UI_Main_Style" />
-    <Style src="project://database/Assets/UI/UI_Tools_Style.uss?fileID=7433441132597879392&amp;guid=3573ded2b8d839b419682cea3b7bbfa7&amp;type=3#UI_Tools_Style" />
-    <Style src="project://database/Assets/UI/UI_Delete_Style.uss?fileID=7433441132597879392&amp;guid=fbc8321bff8a34d4f8b0389b631aea90&amp;type=3#UI_Delete_Style" />
-    <Style src="project://database/Assets/UI/UI_List_Style.uss?fileID=7433441132597879392&amp;guid=6b525d2a53a4aed46886a75994974ca8&amp;type=3#UI_List_Style" />
+    <Style src="project://database/Assets/UI/Stylesheets/UI_Main_Style.uss?fileID=7433441132597879392&amp;guid=db67838345b72ca4498b236ffd075f5c&amp;type=3#UI_Main_Style" />
+    <Style src="project://database/Assets/UI/Stylesheets/UI_Tools_Style.uss?fileID=7433441132597879392&amp;guid=3573ded2b8d839b419682cea3b7bbfa7&amp;type=3#UI_Tools_Style" />
+    <Style src="project://database/Assets/UI/Stylesheets/UI_Delete_Style.uss?fileID=7433441132597879392&amp;guid=fbc8321bff8a34d4f8b0389b631aea90&amp;type=3#UI_Delete_Style" />
+    <Style src="project://database/Assets/UI/Stylesheets/UI_List_Style.uss?fileID=7433441132597879392&amp;guid=6b525d2a53a4aed46886a75994974ca8&amp;type=3#UI_List_Style" />
     <ui:VisualElement name="Frame">
         <ui:VisualElement name="Header">
             <ui:Label name="Header-Label" text="Classement" />
@@ -13,17 +13,15 @@
         <ui:VisualElement name="Body">
             <ui:VisualElement name="Tools">
                 <ui:VisualElement name="Add-Part">
-                    <ui:TextField name="Add-TextField">
-                    </ui:TextField>
+                    <ui:TextField name="Add-TextField" />
                     <ui:Button name="Add-Button">
                         <ui:Label name="Add-Button-Label" text="Ajouter a la liste" />
                     </ui:Button>
                 </ui:VisualElement>
                 <ui:VisualElement name="Switch-Part">
-                    <ui:Toggle name="Switch">
-                        <ui:Label name="Off-Label" text="Ajouter au pied de la liste" />
-                        <ui:Label name="On-Label" text="Ajouter au sommet de la liste" />
-                    </ui:Toggle>
+                    <ui:Label name="Off-Label" text="Ajouter au pied de la liste" />
+                    <ui:Toggle name="Switch" />
+                    <ui:Label name="On-Label" text="Ajouter au sommet de la liste" />
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="List">
@@ -37,7 +35,7 @@
                         <ui:Label name="Limit-Texts-Label" text="Limite de participants" />
                         <ui:Label name="Limit-Texts-Numbers" text="15 / 20" />
                     </ui:VisualElement>
-                    <ui:ProgressBar name="CustomProgressBar" />
+                    <ui:ProgressBar name="CustomProgressBar" class="progressBar" />
                 </ui:VisualElement>
                 <ui:Button name="Delete-Button">
                     <ui:Label name="Delete-Button-Label" text="Retirer de la liste" />
